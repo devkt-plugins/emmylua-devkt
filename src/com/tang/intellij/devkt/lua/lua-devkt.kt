@@ -3,10 +3,9 @@ package com.tang.intellij.devkt.lua
 import com.tang.intellij.devkt.lua.highlighting.*
 import com.tang.intellij.devkt.lua.lang.LuaLanguage
 import com.tang.intellij.devkt.lua.lang.LuaParserDefinition
-import com.tang.intellij.devkt.lua.psi.LuaStringTypes
-import com.tang.intellij.devkt.lua.psi.LuaTypes
-import org.ice1000.devkt.openapi.ColorScheme
-import org.ice1000.devkt.openapi.ExtendedDevKtLanguage
+import com.tang.intellij.devkt.lua.psi.*
+import org.ice1000.devkt.openapi.*
+import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.com.intellij.psi.tree.IElementType
 
 class EmmyLua<T> : ExtendedDevKtLanguage<T>(
@@ -41,5 +40,19 @@ class EmmyLua<T> : ExtendedDevKtLanguage<T>(
 		else -> super.attributesOf(type, colorScheme)
 	}
 
+	override fun annotate(element: PsiElement, document: AnnotationHolder<T>, colorScheme: ColorScheme<T>) {
+		super.annotate(element, document, colorScheme)
+		when (element) {
+			is LuaFuncDef -> function(element, document, colorScheme)
+			is LuaLocalDef -> {
+				element.nameList?.run { nameDefList.forEach {
+					document.highlight(it, colorScheme.variable)
+				} }
+			}
+		}
+	}
 
+	private fun function(element: LuaFuncDef, document: AnnotationHolder<T>, colorScheme: ColorScheme<T>) {
+		element.id?.let { document.highlight(it, colorScheme.function) }
+	}
 }

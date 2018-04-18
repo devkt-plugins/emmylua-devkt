@@ -16,7 +16,9 @@
 
 package com.tang.intellij.devkt.lua.lang;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.kotlin.com.intellij.lang.Language;
+import org.jetbrains.kotlin.com.intellij.openapi.fileTypes.LanguageFileType;
 
 /**
  * Created by TangZhiXu on 2015/11/15.
@@ -27,6 +29,12 @@ public class LuaLanguage extends Language {
 	public static final int INDEX_VERSION = 28;
 
 	public static final LuaLanguage INSTANCE = new LuaLanguage();
+
+	@Override
+	public @NotNull
+	LanguageFileType getAssociatedFileType() {
+		return LuaFileType.INSTANCE;
+	}
 
 	public LuaLanguage() {
 		super("Lua");
