@@ -44,10 +44,14 @@ class EmmyLua<T> : ExtendedDevKtLanguage<T>(
 		super.annotate(element, document, colorScheme)
 		when (element) {
 			is LuaFuncDef -> function(element, document, colorScheme)
-			is LuaLocalDef -> {
-				element.nameList?.run { nameDefList.forEach {
-					document.highlight(it, colorScheme.variable)
-				} }
+			is LuaLocalDef -> localVar(element, document, colorScheme)
+		}
+	}
+
+	private fun localVar(element: LuaLocalDef, document: AnnotationHolder<T>, colorScheme: ColorScheme<T>) {
+		element.nameList?.run {
+			nameDefList.forEach {
+				document.highlight(it, colorScheme.variable)
 			}
 		}
 	}
