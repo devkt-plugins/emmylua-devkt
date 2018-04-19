@@ -5,6 +5,7 @@ import com.tang.intellij.devkt.lua.lang.LuaLanguage
 import com.tang.intellij.devkt.lua.lang.LuaParserDefinition
 import com.tang.intellij.devkt.lua.psi.*
 import org.ice1000.devkt.openapi.*
+import org.ice1000.devkt.openapi.ui.IconLoader
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.com.intellij.psi.tree.IElementType
 
@@ -13,12 +14,9 @@ class EmmyLua<T> : ExtendedDevKtLanguage<T>(
 		LuaParserDefinition()
 ) {
 	override fun satisfies(fileName: String) = fileName.endsWith(".lua") || fileName.endsWith(".lua.txt")
-
-	override val blockComment: Pair<String, String>?
-		get() = "--[[" to "--]]"
-
-	override val lineCommentStart: String?
-		get() = "--"
+	override val icon = IconLoader.getIcon("/icons/lua.png")
+	override val blockComment = "--[[" to "--]]"
+	override val lineCommentStart = "--"
 
 	override fun attributesOf(type: IElementType, colorScheme: ColorScheme<T>) = when (type) {
 		LuaTypes.DOC_COMMENT -> colorScheme.docComments
