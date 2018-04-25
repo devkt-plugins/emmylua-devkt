@@ -8,6 +8,7 @@ import org.ice1000.devkt.openapi.*
 import org.ice1000.devkt.openapi.ui.IconLoader
 import org.ice1000.devkt.openapi.util.CompletionElement
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
+import org.jetbrains.kotlin.com.intellij.psi.StringEscapesTokenTypes
 import org.jetbrains.kotlin.com.intellij.psi.tree.IElementType
 
 class EmmyLua<T> : ExtendedDevKtLanguage<T>(
@@ -41,6 +42,10 @@ class EmmyLua<T> : ExtendedDevKtLanguage<T>(
 			"return",
 			"then",
 			"until",
+			"false",
+			"nil",
+			"true",
+			"goto",
 			"while"
 	).mapTo(HashSet()) { CompletionElement(it, type = "Keyword") }
 
@@ -48,6 +53,8 @@ class EmmyLua<T> : ExtendedDevKtLanguage<T>(
 		LuaTypes.DOC_COMMENT -> colorScheme.docComments
 		LuaTypes.BLOCK_COMMENT -> colorScheme.blockComments
 		LuaTypes.SHORT_COMMENT -> colorScheme.lineComments
+		StringEscapesTokenTypes.VALID_STRING_ESCAPE_TOKEN -> colorScheme.stringEscape
+		StringEscapesTokenTypes.INVALID_CHARACTER_ESCAPE_TOKEN -> colorScheme.unknown
 		LuaTypes.STRING -> colorScheme.string
 		LuaTypes.SEMI -> colorScheme.semicolon
 		LuaTypes.COLON -> colorScheme.colon
