@@ -6,6 +6,7 @@ import com.tang.intellij.devkt.lua.lang.LuaParserDefinition
 import com.tang.intellij.devkt.lua.psi.*
 import org.ice1000.devkt.openapi.*
 import org.ice1000.devkt.openapi.ui.IconLoader
+import org.ice1000.devkt.openapi.util.CompletionElement
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.com.intellij.psi.tree.IElementType
 
@@ -17,6 +18,31 @@ class EmmyLua<T> : ExtendedDevKtLanguage<T>(
 	override val icon = IconLoader.getIcon("/icons/lua.png")
 	override val blockComment = "--[[" to "--]]"
 	override val lineCommentStart = "--"
+
+	override fun shouldAddAsCompletion(element: PsiElement): Boolean {
+		return element is LuaTableField
+	}
+
+	override val initialCompletionElementList = listOf(
+			"and",
+			"break",
+			"do",
+			"else",
+			"elseif",
+			"end",
+			"for",
+			"function",
+			"if",
+			"in",
+			"local",
+			"not",
+			"or",
+			"repeat",
+			"return",
+			"then",
+			"until",
+			"while"
+	).mapTo(HashSet()) { CompletionElement(it, type = "Keyword") }
 
 	override fun attributesOf(type: IElementType, colorScheme: ColorScheme<T>) = when (type) {
 		LuaTypes.DOC_COMMENT -> colorScheme.docComments

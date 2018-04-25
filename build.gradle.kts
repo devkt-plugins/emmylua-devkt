@@ -1,14 +1,14 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import java.io.*
 
-val kotlinVersion = "1.2.31"
+val kotlinVersion = "1.2.40"
 
 group = "com.tang.intellij.devkt.lua"
-version = "v1.0"
+version = "v1.1-SNAPSHOT"
 
 plugins {
   java
-  kotlin("jvm") version "1.2.31"
+  kotlin("jvm") version "1.2.40"
 }
 
 java {
@@ -42,6 +42,8 @@ repositories {
 
 dependencies {
   compileOnly(kotlin("compiler-embeddable", kotlinVersion))
-  compileOnly(files(*File("lib").listFiles()))
+	val version = "5a71725385"
+	compileOnly(group = "com.github.ice1000.dev-kt", name = "common", version = version)
+	runtime(group = "com.github.ice1000.dev-kt", name = "swing", version = version)
 }
 
