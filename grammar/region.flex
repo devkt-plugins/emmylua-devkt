@@ -1,8 +1,8 @@
 package com.tang.intellij.lua.lexer;
 
-import com.intellij.lexer.FlexLexer;
-import com.intellij.psi.TokenType;
-import com.intellij.psi.tree.IElementType;
+import org.jetbrains.kotlin.com.intellij.lexer.FlexLexer;
+import org.jetbrains.kotlin.com.intellij.psi.TokenType;
+import org.jetbrains.kotlin.com.intellij.psi.tree.IElementType;
 
 import static com.tang.intellij.lua.psi.LuaRegionTypes.*;
 %%

@@ -1,9 +1,9 @@
 package com.tang.intellij.lua.lexer;
 
-import com.intellij.lexer.FlexLexer;
-import com.intellij.psi.tree.IElementType;
+import org.jetbrains.kotlin.com.intellij.lexer.FlexLexer;
+import org.jetbrains.kotlin.com.intellij.psi.tree.IElementType;
 
-import static com.intellij.psi.StringEscapesTokenTypes.*;
+import static org.jetbrains.kotlin.com.intellij.psi.StringEscapesTokenTypes.*;
 import static com.tang.intellij.lua.psi.LuaStringTypes.*;
 import static com.tang.intellij.lua.psi.LuaTypes.*;
 %%
