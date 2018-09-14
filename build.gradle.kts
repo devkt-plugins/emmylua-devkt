@@ -1,4 +1,6 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.*
 
 val kotlinVersion = "1.2.70"
@@ -10,6 +12,10 @@ plugins {
 	java
 	application
 	kotlin("jvm") version "1.2.70"
+}
+
+tasks.withType<KotlinCompile> {
+	kotlinOptions { freeCompilerArgs = listOf("-Xjvm-default=enable") }
 }
 
 java {
@@ -38,6 +44,7 @@ java.sourceSets {
 repositories {
 	mavenCentral()
 	jcenter()
+	maven("https://dl.bintray.com/ice1000/ice1000")
 	maven("https://jitpack.io")
 }
 
